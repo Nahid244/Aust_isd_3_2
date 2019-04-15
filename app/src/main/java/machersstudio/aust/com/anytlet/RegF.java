@@ -38,9 +38,7 @@ public class RegF extends Fragment {
         databaseReference1= FirebaseDatabase.getInstance().getReference("Owners");
         databaseReference2= FirebaseDatabase.getInstance().getReference("Renters");
 
-        while(getFragmentManager().getBackStackEntryCount()>0){
-            getFragmentManager().popBackStack();
-        }
+
         E1=(EditText) view.findViewById(R.id.Email);
         E2=(EditText)  view.findViewById(R.id.name);
         E3=(EditText)  view.findViewById(R.id.address);

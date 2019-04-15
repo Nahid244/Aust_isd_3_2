@@ -37,9 +37,7 @@ public class LoginF extends Fragment {
         E2=(EditText)  view.findViewById(R.id.upass);
         b1=(Button)  view.findViewById(R.id.nav_slideshow);
         b=(Button)  view.findViewById(R.id.usup);
-        while(getFragmentManager().getBackStackEntryCount()>0){
-            getFragmentManager().popBackStack();
-        }
+
         b.setOnClickListener(new View.OnClickListener()
         {
             @Override

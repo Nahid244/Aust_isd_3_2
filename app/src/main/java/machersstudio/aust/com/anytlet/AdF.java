@@ -38,9 +38,7 @@ public class AdF extends Fragment {
         databaseReference= FirebaseDatabase.getInstance().getReference("Ads");
         ads=new ArrayList<>();
         itemAdapter=new ItemAdapter(getActivity(),ads);
-        while(getFragmentManager().getBackStackEntryCount()>0){
-            getFragmentManager().popBackStack();
-        }
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
