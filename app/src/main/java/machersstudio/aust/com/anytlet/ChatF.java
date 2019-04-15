@@ -118,7 +118,7 @@ public class ChatF extends Fragment {
     public void srch1(){
         String s=Constants.UserIdentity;
         s=s.replaceAll("\\s+","");
-        Query q=databaseReference1.orderByChild("reciever").equalTo(s).limitToFirst(10);
+        Query q=databaseReference1.orderByChild("reciever").equalTo(s).limitToLast(10);
 
 
         q.addListenerForSingleValueEvent(new ValueEventListener() {

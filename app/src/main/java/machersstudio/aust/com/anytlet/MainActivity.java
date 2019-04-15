@@ -3,6 +3,7 @@ package machersstudio.aust.com.anytlet;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -39,18 +40,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
-        if (getFragmentManager().getBackStackEntryCount() == 0) {
 
-        }
-        else {
-            getFragmentManager().popBackStack();
-        }
     }
 
     @Override
@@ -82,6 +80,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                fm.popBackStack();
+            }
             if(!Constants.UserIdentity.equals("")){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new AdF()).commit();
             }else{
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_gallery) {
+
             if(Constants.UserIdentity.equals("")){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new LoginF()).commit();
             }
@@ -98,6 +102,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
+
             if(Constants.UserIdentity.equals("")){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new RegF()).commit();
             }
@@ -105,8 +110,12 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this,"logged as "+Constants.UserIdentity,Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.upostad) {
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                fm.popBackStack();
+            }
             if(!Constants.UserIdentity.equals("")){
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new PostAd()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new PostAd()).addToBackStack(null).commit();
             }else{
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new LoginF()).commit();
             }
@@ -114,14 +123,20 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.ulogout) {
-            Constants.UserIdentity="";
-            while(getFragmentManager().getBackStackEntryCount()>0){
-                getFragmentManager().popBackStack();
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                fm.popBackStack();
             }
+            Constants.UserIdentity="";
+
             getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new LoginF()).commit();
 
         }
         else if (id == R.id.uAdmin) {
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                fm.popBackStack();
+            }
             if(Constants.UserIdentity.equals("jBond")){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new AdminF()).addToBackStack(null).commit();
             }
@@ -131,6 +146,10 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.umsg) {
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                fm.popBackStack();
+            }
             if(Constants.UserIdentity.equals("")){
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frame,new LoginF()).commit();
             }
